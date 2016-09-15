@@ -1,0 +1,33 @@
+
+body {
+  background-color: #1F2420;
+  color: #43A94E;
+}
+
+#map {
+  position: fixed !important;
+  top: 0;
+  left: 500px;
+  right: 0;
+  bottom: 0;
+}
+
+.toolbar {
+  width: 500px;
+
+  h3 {
+    margin-bottom: 20px;
+  }
+
+  .points {
+    margin-top: 20px;
+
+    &.table-bordered > thead > tr > th {
+      border-bottom-width: 1px;
+    }
+  }
+
+  table, th, td {
+    border-color: #43A94E !important;
+  }
+}
