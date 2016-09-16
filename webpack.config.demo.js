@@ -8,6 +8,8 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "build"),
         publicPath: "/static/",
+        library: "init",
+        libraryTarget: "var",
         filename: "radar-screen-demo.js"
     },
 

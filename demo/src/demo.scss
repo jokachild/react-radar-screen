@@ -19,7 +19,12 @@ body {
     margin-bottom: 20px;
   }
 
-  .points {
+}
+
+.points-table {
+  font-size: 12px;
+
+  table {
     margin-top: 20px;
 
     &.table-bordered > thead > tr > th {

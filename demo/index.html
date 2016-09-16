@@ -5,43 +5,10 @@
     <title>React Radar Screen Demo</title>
 </head>
 <body>
-    <div class="toolbar">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>React Radar Screen Demo</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="radar" class="text-center"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-bordered points">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Distance</th>
-                            <th>Bearing</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Home</td>
-                            <td>880.02m</td>
-                            <td>36.45deg</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="toolbar" class="toolbar"></div>
     <div id="map"></div>
     <script type="text/javascript" src="static/radar-screen-demo.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoRH8RgGHiDDH31H_viVo6wTH3dniaQmI&callback=init"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoRH8RgGHiDDH31H_viVo6wTH3dniaQmI&callback=init.default"
             async defer></script>
 </body>
 </html>
