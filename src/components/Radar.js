@@ -62,10 +62,10 @@ class Radar extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.state = {
+        this.setState({
             indicator: prepareIndicator(nextProps.pxRadius, nextProps.indicatorAngle),
             points: preparePoints(nextProps)
-        };
+        });
     }
 
     _onDetect(point) {
