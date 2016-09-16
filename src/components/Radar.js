@@ -9,7 +9,7 @@ import Point from "./Point";
 import {preparePoints, prepareIndicator} from "../utils/helper";
 
 /**
- * TODO: beep, callbacks
+ * TODO: beep, callbacks, shouldComponentUpdate
  */
 
 class Radar extends React.Component {
@@ -32,6 +32,7 @@ class Radar extends React.Component {
                 <svg width={radius * 2} height={radius * 2} style={{backgroundColor: "#1F2420"}}>
                     <Grid radius={radius}/>
                     <Indicator angle={angle}
+                               centerSize={radius / 40}
                                d={indicator}
                                radius={radius}/>
                     <g className="points">
@@ -39,6 +40,7 @@ class Radar extends React.Component {
                             map((point) => (
                                 <Point key={"" + point.distance + point.bearing}
                                        data={point}
+                                       size={radius / 20}
                                        visible={point.bearing <= angle - 5 && point.bearing >= angle - 50}
                                        onDetect={this._onDetect}/>
                             ))(points)

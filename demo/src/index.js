@@ -4,18 +4,18 @@ import {render} from "react-dom";
 import {Provider} from "react-redux";
 
 import init from "./googleMap/init";
-import Toolbar from "./components/Toolbar";
+import ConnectedToolbar from "./components/Toolbar";
 import store from "./store";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap-theme.css";
 import "./demo.scss";
 
-// TODO: usage tooltip
+// TODO: remove bootstrap
 
 render(
     <Provider store={store}>
-        <Toolbar/>
+        <ConnectedToolbar/>
     </Provider>,
     document.getElementById("toolbar")
 );

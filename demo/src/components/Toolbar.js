@@ -7,6 +7,8 @@ import PointActions from "../actions/points";
 import Radar from "../../../src/index";
 import Points from "./Points";
 
+// TODO: usage tooltip
+
 class Toolbar extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +18,7 @@ class Toolbar extends Component {
     render() {
         const {center, points} = this.props;
         return (
-            <div className="container-fluid">
+            <div className="toolbar container-fluid">
                 <div>
                     <h3>React Radar Screen Demo</h3>
                 </div>
@@ -43,10 +45,6 @@ class Toolbar extends Component {
 Toolbar.propTypes = {
     center: PropTypes.object.isRequired,
     points: PropTypes.array.isRequired
-};
-
-Toolbar.defaultProps = {
-    points: []
 };
 
 const mapStateToProps = (state) => {
