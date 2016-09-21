@@ -2,8 +2,8 @@
 export const DETECT = "POINT_DETECT";
 export const HIDE = "POINT_HIDE";
 
-function detect(point) {
-    return { type: DETECT, point };
+function detect(point, radar) {
+    return { type: DETECT, point, radar };
 }
 
 function hide(point) {

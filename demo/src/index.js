@@ -20,4 +20,4 @@ render(
     document.getElementById("toolbar")
 );
 
-export default init;
+init();

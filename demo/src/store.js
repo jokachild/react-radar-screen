@@ -5,11 +5,13 @@ import uuid from "uuid";
 import rootReducer from "./reducers/index";
 
 export default createStore(rootReducer, {
-    center: { lat: 46.481631, lng: 30.732226, data: { id: uuid(), name: "I'm here" }},
-    points: forEach((point) => point.data.id = uuid())([
-        {lat: 46.492778, lng: 30.747841, data: { name: "Home" }},
-        {lat: 46.481226, lng: 30.738485, data: { name: "Mountain" }},
-        {lat: 46.470236, lng: 30.730643, data: { name: "Forest" }},
-        {lat: 46.464879, lng: 30.706502, data: { name: "River" }}
+    center: { id: uuid(), lat: 50.083702, lng: 14.434289, data: { name: "I'm here" }},
+    points: forEach((point) => point.id = uuid())([
+        {lat: 50.083132, lng: 14.462187, data: { name: "2000" }},
+        {lat: 50.089543, lng: 14.412834, data: { name: "Bridge" }},
+        {lat: 50.083510, lng: 14.395006, data: { name: "Tower" }},
+        {lat: 50.092989, lng: 14.429555, data: { name: "Park" }},
+        {lat: 50.080977, lng: 14.409966, data: { name: "Island" }},
+        {lat: 50.087119, lng: 14.420635, data: { name: "Astronomical Clock" }}
     ])
 }, window.devToolsExtension && window.devToolsExtension());

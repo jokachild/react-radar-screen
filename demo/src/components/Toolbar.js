@@ -12,7 +12,7 @@ import Points from "./Points";
 class Toolbar extends Component {
     constructor(props) {
         super(props);
-        this.onDetectPoint = this.onDetectPoint.bind(this);
+        this.handleDetectPoint = this.handleDetectPoint.bind(this);
     }
 
     render() {
@@ -27,7 +27,7 @@ class Toolbar extends Component {
                            geoRadius={2000}
                            center={center}
                            points={points}
-                           onDetect={this.onDetectPoint}
+                           onDetect={this.handleDetectPoint}
                     />
                 </div>
                 <Points points={points}/>
@@ -35,9 +35,9 @@ class Toolbar extends Component {
         );
     }
 
-    onDetectPoint(point) {
+    handleDetectPoint(point, radar) {
         const { pointActions } = this.props;
-        pointActions.detect(point);
+        pointActions.detect(point, radar);
         setTimeout(() => pointActions.hide(point), 5000);
     }
 }

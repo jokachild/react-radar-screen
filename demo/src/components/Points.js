@@ -29,7 +29,7 @@ const renderPoints = (points) => flow(
     filter((point) => point.visible),
     sortBy(["distance"]),
     map((point) => (
-        <tr key={point.data.id}>
+        <tr key={point.id}>
             <td className="col-md-6">{point.data.name}</td>
             <td className="col-md-3">{point.distance}</td>
             <td className="col-md-3">{point.bearing}</td>
