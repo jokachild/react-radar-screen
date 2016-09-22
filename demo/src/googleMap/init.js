@@ -1,40 +1,69 @@
-import map from "lodash/fp/map";
+import forEach from "lodash/fp/forEach";
 import pick from "lodash/pick";
 
-import gMap from "./map";
+import Map from "./map";
 import store from "../store";
+import MapActions from "../actions/map";
+import PointActions from "../actions/points";
 
-export default () => {
+function bindListeners() {
+    var {getInstance, getMarkers, getCircle, removeMarker} = Map;
 
-    const {center, points} = store.getState();
+    forEach((marker) => (
+        marker.addListener("dblclick", () => (
+            store.dispatch(PointActions.remove(marker.uuid)) &&
+            removeMarker(marker.uuid) &&
+            marker.setMap(null))
+        )
+    ))(getMarkers());
 
-    gMap.map = new google.maps.Map(document.getElementById("map"), {
-        center: center,
-        zoom: 14
+    var circle = getCircle();
+    circle.addListener("center_changed", () => {
+        var position = circle.getCenter();
+        getInstance().setCenter(position);
+        store.dispatch(MapActions.setCenter(position.toJSON()));
     });
 
-    gMap.center = new google.maps.Marker({
-        map: gMap.map,
-        position: center,
-        title: center.data.name
+    circle.addListener("radius_changed", () => {
+        store.dispatch(MapActions.setRadius(circle.getRadius()));
     });
+}
 
-    gMap.points = map((point) => (
-        new google.maps.Marker({
-            map: gMap.map,
-            position: pick(point, ["lat", "lng"]),
-            title: point.data.name
+export default function initMap() {
+    const {map, points} = store.getState();
+    var {getInstance, setInstance, setCircle, addMarker} = Map;
+
+    setInstance(
+        new google.maps.Map(document.getElementById("map"), {
+            center: pick(map.center, ["lat", "lng"]),
+            zoom: 14
         })
+    );
+
+    setCircle(
+        new google.maps.Circle({
+            strokeColor: "#43A94E",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#43A94E",
+            fillOpacity: 0.25,
+            map: getInstance(),
+            center: map.center,
+            radius: map.radius,
+            editable: true
+        })
+    );
+
+    forEach((point) => (
+        addMarker(
+            new google.maps.Marker({
+                map: getInstance(),
+                position: pick(point, ["lat", "lng"]),
+                title: point.data.name,
+                uuid: point.id
+            })
+        )
     ))(points);
 
-    gMap.circle = new google.maps.Circle({
-        strokeColor: "#FF0000",
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: "#FF0000",
-        fillOpacity: 0.25,
-        map: gMap.map,
-        center: center,
-        radius: 2000
-    });
-};
+    bindListeners();
+}

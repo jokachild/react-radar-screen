@@ -1,8 +1,8 @@
 import {combineReducers} from "redux";
-import center from "./center";
+import map from "./map";
 import points from "./points";
 
 export default combineReducers({
-    center,
+    map,
     points
 });

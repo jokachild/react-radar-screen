@@ -1,7 +1,8 @@
 import find from "lodash/fp/find";
+import reject from "lodash/fp/reject";
 import round from "lodash/round";
 
-import { DETECT, HIDE } from "../actions/points";
+import { DETECT, HIDE, REMOVE } from "../actions/points";
 import cloneState from "../utils/cloneState";
 
 var initialState = [];
@@ -27,6 +28,9 @@ export default function points(state = initialState, action = null) {
                 point && (point.visible = false);
                 return s;
             });
+
+        case REMOVE:
+            return cloneState(state, (s) => reject({id: action.id})(s));
 
         default:
             return state;

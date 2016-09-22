@@ -16,7 +16,7 @@ class Toolbar extends Component {
     }
 
     render() {
-        const {center, points} = this.props;
+        const {center, radius, points} = this.props;
         return (
             <div className="toolbar container-fluid">
                 <div>
@@ -24,7 +24,7 @@ class Toolbar extends Component {
                 </div>
                 <div className="text-center">
                     <Radar pxRadius={200}
-                           geoRadius={2000}
+                           geoRadius={radius}
                            center={center}
                            points={points}
                            onDetect={this.handleDetectPoint}
@@ -43,13 +43,15 @@ class Toolbar extends Component {
 }
 
 Toolbar.propTypes = {
+    radius: PropTypes.number.isRequired,
     center: PropTypes.object.isRequired,
     points: PropTypes.array.isRequired
 };
 
 const mapStateToProps = (state) => {
     return {
-        center: state.center,
+        center: state.map.center,
+        radius: state.map.radius,
         points: state.points
     };
 };
