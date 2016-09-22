@@ -1,9 +1,9 @@
 
-import uuid from "uuid";
 import assign from "lodash/assign";
 import cloneDeep from "lodash/cloneDeep";
 
 import Geo, {deg2rad} from "./geo";
+import uuid from "./uuid";
 
 var Point = assign({}, Geo, {
     getData: function getData() {
