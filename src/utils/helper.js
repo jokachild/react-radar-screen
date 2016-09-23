@@ -4,6 +4,7 @@ import map from "lodash/fp/map";
 import filter from "lodash/fp/filter";
 import assign from "lodash/assign";
 import round from "lodash/round";
+import cloneDeep from "lodash/cloneDeep";
 
 import {rad2deg, deg2rad} from "./geo";
 import CreatePoint from "./point";
@@ -26,10 +27,9 @@ const preparePoints = (props) => {
             });
         }),
         filter((point) => (point.distance < geoRadius))
-    )(points);
+    )(cloneDeep(points));
 };
 
-// TODO: 1 px correction
 const prepareIndicator = (radius, angle) => (
     "M %R %R L %R 0 A%R %R 0 0 0 %DX %DY L%DX %R Z"
         .replace(/%R/g, radius.toString())

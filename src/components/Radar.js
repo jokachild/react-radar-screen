@@ -9,7 +9,7 @@ import Point from "./Point";
 import {preparePoints, prepareIndicator} from "../utils/helper";
 
 /**
- * TODO: beep, callbacks, shouldComponentUpdate, grid padding and overlay
+ * TODO: beep, shouldComponentUpdate, grid padding and overlay, extend styles, ProvidePlugin
  */
 
 class Radar extends React.Component {

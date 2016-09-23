@@ -1,6 +1,5 @@
 
 import assign from "lodash/assign";
-import cloneDeep from "lodash/cloneDeep";
 
 import Geo, {deg2rad} from "./geo";
 import uuid from "./uuid";
@@ -22,7 +21,7 @@ var CreatePoint = function(p) {
         id: p.id || uuid(),
         lat: deg2rad(p.lat),
         lng: deg2rad(p.lng),
-        orig: cloneDeep(p)
+        orig: p
     });
 };
 

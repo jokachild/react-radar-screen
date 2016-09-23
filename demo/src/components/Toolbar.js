@@ -2,12 +2,14 @@
 import React, { Component, PropTypes } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import map from "lodash/fp/map";
+import pick from "lodash/pick";
 
 import PointActions from "../actions/points";
 import Radar from "../../../src/index";
 import Points from "./Points";
 
-// TODO: usage tooltip
+// TODO: usage tooltip, valid propTypes
 
 class Toolbar extends Component {
     constructor(props) {
@@ -17,7 +19,6 @@ class Toolbar extends Component {
 
     render() {
         const {center, radius, points} = this.props;
-        // TODO: find why Radar mutates points array
         return (
             <div className="toolbar container-fluid">
                 <div>
@@ -27,7 +28,7 @@ class Toolbar extends Component {
                     <Radar pxRadius={200}
                            geoRadius={radius}
                            center={center}
-                           points={points}
+                           points={map((point) => pick(point, ["id", "lat", "lng", "data"]))(points)}
                            onDetect={this.handleDetectPoint}
                     />
                 </div>
