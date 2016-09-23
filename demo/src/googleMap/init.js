@@ -1,13 +1,16 @@
+import assign from "lodash/assign";
 import forEach from "lodash/fp/forEach";
 import pick from "lodash/pick";
+import uuid from "uuid";
 
 import Map from "./map";
 import store from "../store";
 import MapActions from "../actions/map";
 import PointActions from "../actions/points";
+var addMarkerTpl = require("raw!./add-marker.html");
 
 function bindListeners() {
-    var {getInstance, getMarkers, getCircle, removeMarker} = Map;
+    var {getInstance, getMarkers, getCircle, addMarker, removeMarker} = Map;
 
     forEach((marker) => (
         marker.addListener("dblclick", () => (
@@ -27,6 +30,46 @@ function bindListeners() {
     circle.addListener("radius_changed", () => {
         store.dispatch(MapActions.setRadius(circle.getRadius()));
     });
+
+    // Add Marker InfoWindow
+    var container = document.querySelector("#new-marker");
+    forEach(obj => obj.addListener("click", (event) => {
+        container.innerHTML = addMarkerTpl;
+        var title = container.querySelector("input");
+        var info = new google.maps.InfoWindow({
+            content: container.querySelector("form")
+        });
+        container.querySelector("button").addEventListener("click", () => {
+            if (title.value) {
+                marker.setTitle(title.value);
+                addMarker(marker);
+                store.dispatch(PointActions.add(
+                    assign({
+                        id: marker.uuid,
+                        data: {
+                            name: title.value
+                        }
+                    }, marker.getPosition().toJSON())
+                ));
+                // TODO: remove duplicated logic
+                marker.addListener("dblclick", () => (
+                    store.dispatch(PointActions.remove(marker.uuid)) &&
+                    removeMarker(marker.uuid) &&
+                    marker.setMap(null))
+                );
+                info.close();
+            }
+        });
+        var marker = new google.maps.Marker({
+            map: getInstance(),
+            position: event.latLng.toJSON(),
+            title: "Asd",
+            uuid: uuid()
+        });
+        info.addListener("closeclick", () => marker.setMap(null));
+        info.open(getInstance(), marker);
+
+    }))([getInstance(), getCircle()]);
 }
 
 export default function initMap() {

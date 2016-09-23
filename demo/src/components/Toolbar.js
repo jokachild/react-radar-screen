@@ -17,6 +17,7 @@ class Toolbar extends Component {
 
     render() {
         const {center, radius, points} = this.props;
+        // TODO: find why Radar mutates points array
         return (
             <div className="toolbar container-fluid">
                 <div>

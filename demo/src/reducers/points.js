@@ -2,7 +2,7 @@ import find from "lodash/fp/find";
 import reject from "lodash/fp/reject";
 import round from "lodash/round";
 
-import { DETECT, HIDE, REMOVE } from "../actions/points";
+import { DETECT, HIDE, ADD, REMOVE } from "../actions/points";
 import cloneState from "../utils/cloneState";
 
 var initialState = [];
@@ -26,6 +26,12 @@ export default function points(state = initialState, action = null) {
             return cloneState(state, (s) => {
                 var point = findPoint(s, action.point);
                 point && (point.visible = false);
+                return s;
+            });
+
+        case ADD:
+            return cloneState(state, (s) => {
+                s.push(action.point);
                 return s;
             });
 
