@@ -8,8 +8,7 @@
     },
     "globals": {
       "React": true,
-      "NODE_ENV": true,
-      "google": true
+      "NODE_ENV": true
     },
     "extends": "eslint:recommended",
     "parser": "babel-eslint",

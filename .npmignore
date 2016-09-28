@@ -1,8 +1,8 @@
 
 **/.idea
 build
-demo
+example
 dist/*.map
 node_modules
 npm-debug.log
-webpack.config.demo.js
+webpack.config.js
