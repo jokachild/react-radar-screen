@@ -1,6 +1,6 @@
 {
   "name": "react-radar-screen",
-  "version": "0.0.15",
+  "version": "0.1.1",
   "description": "Radar screen component built with React.js",
   "main": "dist/index.js",
   "scripts": {
